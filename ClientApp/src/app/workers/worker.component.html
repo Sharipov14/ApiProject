@@ -1,0 +1,58 @@
+<h1>Список сотрудников</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
+<table *ngIf="tableMode; else create" class="table table-striped">
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>ФИО</td>
+            <td>Должность</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let w of workers">
+            <ng-template [ngIf]="worker?.workerId != w.workerId" [ngIfElse]="edit">
+                <td>{{w?.workerId}}</td>
+                <td>{{w?.fullName}}</td>
+                <td>{{w?.position}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editWorker(w)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="delete(w)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+    <td>
+        {{worker.workerId}}
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="worker.fullName" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="worker.position" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+    <div class="form-group">
+        <label>ФИО</label>
+        <input type="text" [(ngModel)]="worker.fullName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Должность</label>
+        <input type="text" [(ngModel)]="worker.position" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+</ng-template>

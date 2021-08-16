@@ -1,0 +1,76 @@
+<h1>Список Distributions</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
+<table *ngIf="tableMode; else create" class="table table-striped">
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>worker_id</td>
+            <td>project_id</td>
+            <td>ННачало</td>
+            <td>Часы</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let d of distributions">
+            <ng-template [ngIf]="distribution?.id != d.id" [ngIfElse]="edit">
+                <td>{{d?.id}}</td>
+                <td>{{d?.workerId}}</td>
+                <td>{{d?.projectId}}</td>
+                <td>{{d?.dateStart}}</td>
+                <td>{{d?.hours}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editWorker(d)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="delete(d)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+    <td>
+        {{distribution?.id}}
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="distribution.workerId" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="distribution.projerctId" class="form-control" />
+    </td>
+    <td>
+        <input type="datetime" [(ngModel)]="distribution.dateStart" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="distribution.hours" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+    <div class="form-group">
+        <label>worker_id</label>
+        <input type="number" [(ngModel)]="distribution.workerId" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>project_id</label>
+        <input type="number" [(ngModel)]="distribution.projerctId" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Начало</label>
+        <input type="datetime" [(ngModel)]="distribution.dateStart" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Часы</label>
+        <input type="number" [(ngModel)]="distribution.hours" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+</ng-template>
