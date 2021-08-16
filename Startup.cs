@@ -5,6 +5,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using HelloAngularApp.Models;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace ApiProject
 {
@@ -14,8 +16,16 @@ namespace ApiProject
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = @"Data Source=DESKTOP-5Q9E6QS\SQLEXPRESS;Initial Catalog=DBProject;Integrated Security=True";
-            services.AddDbContext<ApplicationContext>(option => option.UseSqlServer(connectionString));
+            var builder = new ConfigurationBuilder();
+            // установка пути к текущему каталогу
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            // получаем конфигурацию из файла appsettings.json
+            builder.AddJsonFile("appsettings.json");
+            // создаем конфигурацию
+            var config = builder.Build();
+            // получаем строку подключения
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ApplicationContext>(option => option.UseSqlServer(connectionString).LogTo(message => System.Diagnostics.Debug.WriteLine(message)));
 
             services.AddControllers();
 

@@ -43,7 +43,6 @@ export class DistributionComponent implements OnInit {
     cancel() {
         this.distribution = new Distribution();
         this.tableMode = true;
-        this.loadDistributions();
     }
     delete(p: Distribution) {
         this.dataService.delete(this.url ,p.id)

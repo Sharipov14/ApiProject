@@ -43,7 +43,6 @@ export class ProjectComponent implements OnInit {
     cancel() {
         this.project = new Project();
         this.tableMode = true;
-        this.loadProjects();
     }
     delete(p: Project) {
         this.dataService.delete(this.url ,p.projectId)

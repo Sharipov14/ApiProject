@@ -15,10 +15,10 @@ let DistributionComponent = class DistributionComponent {
         this.tableMode = true; // табличный режим
     }
     ngOnInit() {
-        this.loadProjects(); // загрузка данных при старте компонента  
+        this.loadDistributions(); // загрузка данных при старте компонента  
     }
     // получаем данные через сервис
-    loadProjects() {
+    loadDistributions() {
         this.dataService.getAll(this.url)
             .subscribe((data) => this.distributions = data);
     }
@@ -30,21 +30,20 @@ let DistributionComponent = class DistributionComponent {
         }
         else {
             this.dataService.update(this.url, this.distribution)
-                .subscribe(data => this.loadProjects());
+                .subscribe(data => this.loadDistributions());
         }
         this.cancel();
     }
-    editProject(p) {
+    editDistribution(p) {
         this.distribution = p;
     }
     cancel() {
         this.distribution = new Distribution();
         this.tableMode = true;
-        this.loadProjects();
     }
     delete(p) {
         this.dataService.delete(this.url, p.id)
-            .subscribe(data => this.loadProjects());
+            .subscribe(data => this.loadDistributions());
     }
     add() {
         this.cancel();

@@ -40,7 +40,6 @@ let ProjectComponent = class ProjectComponent {
     cancel() {
         this.project = new Project();
         this.tableMode = true;
-        this.loadProjects();
     }
     delete(p) {
         this.dataService.delete(this.url, p.projectId)
