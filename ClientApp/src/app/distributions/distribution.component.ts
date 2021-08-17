@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DSAEncoding } from 'crypto';
 import { DataService } from 'src/app/data.service';
 import { Distribution } from './distributions';
 
@@ -18,7 +19,8 @@ export class DistributionComponent implements OnInit {
     constructor(private dataService: DataService) {}
 
     ngOnInit() {
-        this.loadDistributions();    // загрузка данных при старте компонента  
+        this.loadDistributions();    // загрузка данных при старте компонента 
+        console.log("------------------------------------------")
     }
 
     // получаем данные через сервис

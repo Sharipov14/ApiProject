@@ -15,7 +15,8 @@ let DistributionComponent = class DistributionComponent {
         this.tableMode = true; // табличный режим
     }
     ngOnInit() {
-        this.loadDistributions(); // загрузка данных при старте компонента  
+        this.loadDistributions(); // загрузка данных при старте компонента 
+        console.log("------------------------------------------");
     }
     // получаем данные через сервис
     loadDistributions() {
