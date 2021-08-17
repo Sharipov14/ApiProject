@@ -1,7 +1,7 @@
 export class Project {
-    constructor(projectId, name) {
+    constructor(projectId, projectName) {
         this.projectId = projectId;
-        this.name = name;
+        this.projectName = projectName;
     }
 }
 //# sourceMappingURL=project.js.map

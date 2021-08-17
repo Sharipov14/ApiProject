@@ -1,1 +1,1 @@
-{"version":3,"file":"project.js","sourceRoot":"","sources":["project.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,OAAO;IAChB,YACW,SAAkB,EAClB,IAAa;QADb,cAAS,GAAT,SAAS,CAAS;QAClB,SAAI,GAAJ,IAAI,CAAS;IAAI,CAAC;CAChC"}
+{"version":3,"file":"project.js","sourceRoot":"","sources":["project.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,OAAO;IAChB,YACW,SAAkB,EAClB,WAAoB;QADpB,cAAS,GAAT,SAAS,CAAS;QAClB,gBAAW,GAAX,WAAW,CAAS;IAAI,CAAC;CACvC"}

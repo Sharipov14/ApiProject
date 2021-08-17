@@ -1,8 +1,8 @@
 export class Worker {
-    constructor(workerId, fullName, position) {
+    constructor(workerId, WorkerFio, workePosition) {
         this.workerId = workerId;
-        this.fullName = fullName;
-        this.position = position;
+        this.WorkerFio = WorkerFio;
+        this.workePosition = workePosition;
     }
 }
 //# sourceMappingURL=worker.js.map
