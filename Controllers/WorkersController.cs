@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using HelloAngularApp.Models;
-using ApiProject.Models.Workers;
+using ApiProject.Models;
 
 namespace ApiProject.Controllers
 {

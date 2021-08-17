@@ -1,11 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
-namespace ApiProject.Models.Projects
+namespace ApiProject.Models
 {
-    public class Project
+    public partial class Project
     {
-        [Key]
+        public Project()
+        {
+            Distributions = new HashSet<Distribution>();
+            PossibleProjects = new HashSet<PossibleProject>();
+        }
+
         public int ProjectId { get; set; }
-        public string Name { get; set; }
+        public string ProjectName { get; set; }
+
+        public virtual ICollection<Distribution> Distributions { get; set; }
+        public virtual ICollection<PossibleProject> PossibleProjects { get; set; }
     }
 }

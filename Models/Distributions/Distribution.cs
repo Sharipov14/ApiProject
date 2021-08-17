@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace ApiProject.Models.Distributions
+namespace ApiProject.Models
 {
-    public class Distribution
+    public partial class Distribution
     {
-        [Key]
         public int Id { get; set; }
         public int WorkerId { get; set; }
         public int ProjectId { get; set; }
         public DateTime DateStart { get; set; }
         public int Hours { get; set; }
+
+        public virtual Project Project { get; set; }
+        public virtual Worker Worker { get; set; }
     }
 }
