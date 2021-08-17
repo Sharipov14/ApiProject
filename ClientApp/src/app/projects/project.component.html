@@ -12,7 +12,7 @@
         <tr *ngFor="let p of projects">
             <ng-template [ngIf]="project?.projectId != p.projectId" [ngIfElse]="edit">
                 <td>{{p?.projectId}}</td>
-                <td>{{p?.name}}</td>
+                <td>{{p?.projectName}}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" (click)="editProject(p)">Изменить</button>
                     <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
@@ -28,7 +28,7 @@
         {{project.projectId}}
     </td>
     <td>
-        <input type="text" [(ngModel)]="project.name" class="form-control" />
+        <input type="text" [(ngModel)]="project.projectName" class="form-control" />
     </td>
     <td>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
@@ -40,7 +40,7 @@
 <ng-template #create>
     <div class="form-group">
         <label>Проект</label>
-        <input type="text" [(ngModel)]="project.name" class="form-control" />
+        <input type="text" [(ngModel)]="project.projectName" class="form-control" />
     </div>
     <div>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />

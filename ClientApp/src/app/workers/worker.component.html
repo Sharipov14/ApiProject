@@ -13,8 +13,8 @@
         <tr *ngFor="let w of workers">
             <ng-template [ngIf]="worker?.workerId != w.workerId" [ngIfElse]="edit">
                 <td>{{w?.workerId}}</td>
-                <td>{{w?.fullName}}</td>
-                <td>{{w?.position}}</td>
+                <td>{{w?.workerFio}}</td>
+                <td>{{w?.workerPosition}}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" (click)="editWorker(w)">Изменить</button>
                     <button class="btn btn-sm btn-danger" (click)="delete(w)">Удалить</button>
@@ -30,10 +30,10 @@
         {{worker.workerId}}
     </td>
     <td>
-        <input type="text" [(ngModel)]="worker.fullName" class="form-control" />
+        <input type="text" [(ngModel)]="worker.workerFio" class="form-control" />
     </td>
     <td>
-        <input type="text" [(ngModel)]="worker.position" class="form-control" />
+        <input type="text" [(ngModel)]="worker.workerPosition" class="form-control" />
     </td>
     <td>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
@@ -45,11 +45,11 @@
 <ng-template #create>
     <div class="form-group">
         <label>ФИО</label>
-        <input type="text" [(ngModel)]="worker.fullName" class="form-control" />
+        <input type="text" [(ngModel)]="worker.workerFio" class="form-control" />
     </div>
     <div class="form-group">
         <label>Должность</label>
-        <input type="text" [(ngModel)]="worker.position" class="form-control" />
+        <input type="text" [(ngModel)]="worker.workerPosition" class="form-control" />
     </div>
     <div>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
