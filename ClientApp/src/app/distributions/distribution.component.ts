@@ -29,7 +29,7 @@ export class DistributionComponent implements OnInit {
     // сохранение данных
     save() {       
         if (this.distribution.id == null) {
-            this.dataService.create(this.url ,this.distribution)
+            this.dataService.create(this.url, this.distribution)
                 .subscribe((data: Distribution) => this.distributions.push(data));
         } else {
             this.dataService.update(this.url ,this.distribution)

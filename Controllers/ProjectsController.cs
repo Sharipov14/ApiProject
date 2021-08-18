@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ApiProject.Models;
+using ApiProject.IServices;
 
 namespace ApiProject.Controllers
 {
@@ -10,6 +11,8 @@ namespace ApiProject.Controllers
     public class ProjectsController : Controller
     {
         ApplicationContext db;
+        //IProjectService ProjectSeviceI;
+
         public ProjectsController(ApplicationContext context)
         {
             db = context;
@@ -45,7 +48,7 @@ namespace ApiProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Update(project);
+                db.Projects.Update(project);
                 db.SaveChanges();
                 return Ok(project);
             }

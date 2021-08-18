@@ -49,7 +49,9 @@ namespace ApiProject.Controllers
         [HttpGet("{id}")]
         public Distribution Get(int id)
         {
-            Distribution distribution = db.Distributions.FirstOrDefault(x => x.Id == id);
+            Distribution distribution = db.Distributions.Include(p => p.Project).Include(w => w.Worker).FirstOrDefault(x => x.Id == id);
+            distribution.ProjectName = distribution.Project.ProjectName;
+            distribution.WorkerFio = distribution.Worker.WorkerFio;
             return distribution;
         }
 
@@ -58,6 +60,10 @@ namespace ApiProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var project = db.Projects.FirstOrDefault(x => x.ProjectName == distribution.ProjectName);
+                var worker = db.Workers.FirstOrDefault(x => x.WorkerFio == distribution.WorkerFio);
+                distribution.ProjectId = project.ProjectId;
+                distribution.WorkerId = worker.WorkerId;
                 db.Distributions.Add(distribution);
                 db.SaveChanges();
                 return Ok(distribution);
@@ -70,6 +76,10 @@ namespace ApiProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var project = db.Projects.FirstOrDefault(x => x.ProjectName == distribution.ProjectName);
+                var worker = db.Workers.FirstOrDefault(x => x.WorkerFio == distribution.WorkerFio);
+                distribution.ProjectId = project.ProjectId;
+                distribution.WorkerId = worker.WorkerId;
                 db.Update(distribution);
                 db.SaveChanges();
                 return Ok(distribution);

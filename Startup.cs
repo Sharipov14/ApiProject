@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using ApiProject.Models;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using ApiProject.IServices;
+using ApiProject.Services;
 
 namespace ApiProject
 {
@@ -28,8 +30,9 @@ namespace ApiProject
             services.AddDbContext<ApplicationContext>(option => option/*.UseLazyLoadingProxies()*/.UseSqlServer(connectionString));
 
             services.AddControllers();
-                //.AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //.AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             //);
+            services.AddTransient<IProjectService, ProjectService>();
 
             services.AddSpaStaticFiles(configuration =>
             {

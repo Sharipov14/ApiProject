@@ -25,14 +25,21 @@ namespace ApiProject.Services
             db.Projects.Add(project);
             db.SaveChanges();
         }
-    }
         public void Update(Project project)
         {
-
+            db.Projects.Update(project);
+            db.SaveChanges();
         }
         public Project Delete(int id)
         {
+            Project project = Get(id);
 
+            if (project != null)
+            {
+                db.Projects.Remove(project);
+                db.SaveChanges();
+            }
+            return project;
         }
     }
 }
