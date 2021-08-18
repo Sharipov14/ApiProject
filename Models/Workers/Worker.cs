@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApiProject.Models
 {
@@ -15,8 +16,11 @@ namespace ApiProject.Models
         public string WorkerFio { get; set; }
         public string WorkerPosition { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Distribution> Distributions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PossibleProject> PossibleProjects { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Report> Reports { get; set; }
     }
 }

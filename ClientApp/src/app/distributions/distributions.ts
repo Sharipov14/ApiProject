@@ -4,5 +4,8 @@ export class Distribution {
         public workerId?: number,
         public projectId?: number,
         public dateStart?: string | Date,
-        public hours?: number) {}
+        public hours?: number,
+        
+        public workerFio?: string,
+        public projectName?: string) {}
 }

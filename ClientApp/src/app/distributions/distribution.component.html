@@ -4,9 +4,9 @@
     <thead>
         <tr>
             <td>id</td>
-            <td>worker_id</td>
-            <td>project_id</td>
-            <td>ННачало</td>
+            <td>ФИО</td>
+            <td>Проект</td>
+            <td>Начало</td>
             <td>Часы</td>
             <td></td>
         </tr>
@@ -15,8 +15,8 @@
         <tr *ngFor="let d of distributions">
             <ng-template [ngIf]="distribution?.id != d.id" [ngIfElse]="edit">
                 <td>{{d?.id}}</td>
-                <td>{{d?.workerId}}</td>
-                <td>{{d?.projectId}}</td>
+                <td>{{d?.workerFio}}</td>
+                <td>{{d?.projectName}}</td>
                 <td>{{d?.dateStart}}</td>
                 <td>{{d?.hours}}</td>
                 <td>

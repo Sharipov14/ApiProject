@@ -2,7 +2,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ApiProject.Models;
-using System;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiProject.Controllers
 {
@@ -19,22 +20,31 @@ namespace ApiProject.Controllers
         [HttpGet]
         public IEnumerable<Distribution> Get()
         {
-           /* Worker worker = new Worker { WorkerFio = "ФИО1", WorkerPosition = "Разработчик1" };
-            Worker worker2 = new Worker { WorkerFio = "ФИО2", WorkerPosition = "Разработчик2" };
-            Distribution distribution1 = new Distribution { ProjectId = 1, Worker = worker, DateStart = DateTime.Parse("5 / 1 / 2020 8:30:52 AM", System.Globalization.CultureInfo.InvariantCulture), Hours = 4 };
-            Distribution distribution2 = new Distribution { ProjectId = 1, Worker = worker2, DateStart = DateTime.Parse("5 / 3 / 2020 8:30:52 AM", System.Globalization.CultureInfo.InvariantCulture), Hours = 1 };
-            Distribution distribution3 = new Distribution { ProjectId = 1, Worker = worker, DateStart = DateTime.Parse("5 / 2 / 2020 8:30:52 AM", System.Globalization.CultureInfo.InvariantCulture), Hours = 6 };
+            var d = db.Distributions.Include(d => d.Project).Include(b => b.Worker).ToList();
 
-            db.Workers.AddRange(worker, worker2);
-            db.Distributions.AddRange(distribution1, distribution2, distribution3);
-            db.SaveChanges();*/
-
-            foreach (var distrib in db.Distributions.ToList())
+            foreach (var l in d)
             {
-                string workerName = distrib.Worker?.WorkerFio;
+                l.ProjectName = l.Project.ProjectName;
+                l.WorkerFio = l.Worker.WorkerFio;
             }
-            return db.Distributions.ToList();
+
+            return d;
         }
+
+        /*[HttpGet]
+        public async Task<ActionResult<IEnumerable<Distribution>>> GetDistributions()
+        {
+            //var worker = db.Workers.ToList();
+            //IEnumerable<Distribution> distributions =  db.Distributions.ToList();
+            var d = db.Distributions.ToListAsync();
+
+            foreach (var l in d)
+            {
+
+            }
+
+            return await db.Distributions.ToListAsync();
+        }*/
 
         [HttpGet("{id}")]
         public Distribution Get(int id)

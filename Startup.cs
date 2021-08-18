@@ -25,9 +25,11 @@ namespace ApiProject
             var config = builder.Build();
             // получаем строку подключения
             string connectionString = config.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationContext>(option => option.UseSqlServer(connectionString).LogTo(message => System.Diagnostics.Debug.WriteLine(message)));
+            services.AddDbContext<ApplicationContext>(option => option/*.UseLazyLoadingProxies()*/.UseSqlServer(connectionString));
 
             services.AddControllers();
+                //.AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //);
 
             services.AddSpaStaticFiles(configuration =>
             {
