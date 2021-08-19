@@ -1,34 +1,35 @@
 ﻿using ApiProject.IServices;
 using ApiProject.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiProject.Services
 {
     public class ProjectService : IProjectService
     {
-        ApplicationContext db;
+        private ApplicationContext Context;
+
+        public ProjectService(ApplicationContext context)
+        {
+            Context = context;
+        }
 
         public IEnumerable<Project> Get()
         {
-            return db.Projects.ToList();
+            return Context.Projects.ToList();
         }
         public Project Get(int id)
         {
-            Project project = db.Projects.FirstOrDefault(x => x.ProjectId == id);
+            Project project = Context.Projects.FirstOrDefault(x => x.ProjectId == id);
             return project;
         }
         public void Create(Project project)
         {
-            db.Projects.Add(project);
-            db.SaveChanges();
+            Context.Projects.Add(project);
         }
         public void Update(Project project)
         {
-            db.Projects.Update(project);
-            db.SaveChanges();
+            Context.Projects.Update(project);
         }
         public Project Delete(int id)
         {
@@ -36,8 +37,7 @@ namespace ApiProject.Services
 
             if (project != null)
             {
-                db.Projects.Remove(project);
-                db.SaveChanges();
+                Context.Projects.Remove(project);
             }
             return project;
         }

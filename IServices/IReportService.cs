@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiProject.IServices
 {
-    interface IReportService
+    public interface IReportService
     {
         IEnumerable<Report> Get();
         Report Get(int id);

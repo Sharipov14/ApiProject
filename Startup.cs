@@ -32,7 +32,7 @@ namespace ApiProject
             services.AddControllers();
             //.AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             //);
-            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddSpaStaticFiles(configuration =>
             {

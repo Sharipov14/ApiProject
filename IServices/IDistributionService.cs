@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApiProject.IServices
 {
-    interface IDestributionService
+    public interface IDistributionService
     {
         IEnumerable<Distribution> Get();
         Distribution Get(int id);

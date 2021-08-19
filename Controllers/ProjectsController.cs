@@ -8,27 +8,24 @@ namespace ApiProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProjectsController : Controller
+    public class ProjectController : Controller
     {
-        ApplicationContext db;
-        //IProjectService ProjectSeviceI;
-
-        public ProjectsController(ApplicationContext context)
+        IRepositoryWrapper RepoWrapper;
+        public ProjectController(IRepositoryWrapper repoWrapper)
         {
-            db = context;
+            RepoWrapper = repoWrapper;
         }
 
         [HttpGet]
         public IEnumerable<Project> Get()
         {
-            return db.Projects.ToList();
+            return RepoWrapper.Project.Get();
         }
 
         [HttpGet("{id}")]
         public Project Get(int id)
         {
-            Project project = db.Projects.FirstOrDefault(x => x.ProjectId == id);
-            return project;
+            return RepoWrapper.Project.Get(id);
         }
 
         [HttpPost]
@@ -36,8 +33,9 @@ namespace ApiProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Projects.Add(project);
-                db.SaveChanges();
+                RepoWrapper.Project.Create(project);
+                RepoWrapper.Save();
+
                 return Ok(project);
             }
             return BadRequest(ModelState);
@@ -48,8 +46,9 @@ namespace ApiProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Projects.Update(project);
-                db.SaveChanges();
+                RepoWrapper.Project.Update(project);
+                RepoWrapper.Save();
+
                 return Ok(project);
             }
             return BadRequest(ModelState);
@@ -58,13 +57,10 @@ namespace ApiProject.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Project project = db.Projects.FirstOrDefault(x => x.ProjectId == id);
-            if (project != null)
-            {
-                db.Projects.Remove(project);
-                db.SaveChanges();
-            }
-            return Ok(project);
+            var deleteProject = RepoWrapper.Project.Delete(id);
+            RepoWrapper.Save();
+
+            return Ok(deleteProject);
         }
     }
 }

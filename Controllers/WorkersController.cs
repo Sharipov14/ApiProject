@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ApiProject.Models;
+using ApiProject.IServices;
 
 namespace ApiProject.Controllers
 {
@@ -9,23 +10,22 @@ namespace ApiProject.Controllers
     [Route("api/[controller]")]
     public class WorkersController : Controller
     {
-        ApplicationContext db;
-        public WorkersController(ApplicationContext context)
+        IRepositoryWrapper RepoWrapper;
+        public WorkersController(IRepositoryWrapper repoWrapper)
         {
-            db = context;
+            RepoWrapper = repoWrapper;
         }
 
         [HttpGet]
         public IEnumerable<Worker> Get()
         {
-            return db.Workers.ToList();
+            return RepoWrapper.Worker.Get();
         }
 
         [HttpGet("{id}")]
         public Worker Get(int id)
         {
-            Worker worker = db.Workers.FirstOrDefault(x => x.WorkerId == id);
-            return worker;
+            return RepoWrapper.Worker.Get(id);
         }
 
         [HttpPost]
@@ -33,8 +33,9 @@ namespace ApiProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Workers.Add(worker);
-                db.SaveChanges();
+                RepoWrapper.Worker.Create(worker);
+                RepoWrapper.Save();
+
                 return Ok(worker);
             }
             return BadRequest(ModelState);
@@ -45,8 +46,9 @@ namespace ApiProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Update(worker);
-                db.SaveChanges();
+                RepoWrapper.Worker.Update(worker);
+                RepoWrapper.Save();
+
                 return Ok(worker);
             }
             return BadRequest(ModelState);
@@ -55,13 +57,10 @@ namespace ApiProject.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Worker worker = db.Workers.FirstOrDefault(x => x.WorkerId == id);
-            if (worker != null)
-            {
-                db.Workers.Remove(worker);
-                db.SaveChanges();
-            }
-            return Ok(worker);
+            var deleteWorker = RepoWrapper.Worker.Delete(id);
+            RepoWrapper.Save();
+
+            return Ok(deleteWorker);
         }
     }
 }

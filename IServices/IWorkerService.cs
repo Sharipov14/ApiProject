@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApiProject.IServices
 {
-    interface IWorkerService
+    public interface IWorkerService
     {
         IEnumerable<Worker> Get();
         Worker Get(int id);

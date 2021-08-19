@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApiProject.IServices
 {
-    interface IPossibleProjectService
+    public interface IPossibleProjectService
     {
         IEnumerable<PossibleProject> Get();
         PossibleProject Get(int id);
