@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiProject.Services
 {
-    public class PossibleProjectervice : IPossibleProjectService
+    public class PossibleProjectService : IPossibleProjectService
     {
         private ApplicationContext Context;
 
-        public PossibleProjectervice(ApplicationContext context)
+        public PossibleProjectService(ApplicationContext context)
         {
             Context = context;
         }

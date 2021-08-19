@@ -30,7 +30,7 @@ namespace ApiProject.Services
             get {
                 if (worker == null)
                 {
-                    //worker = new WorkerService(context);
+                    worker = new WorkerService(context);
                 }
                 return worker;
             }
@@ -40,17 +40,17 @@ namespace ApiProject.Services
                 return distribution;
             }
         }
-        public IPossibleProjectService PossibleProject
-        {
-            get
-            {
+        public IPossibleProjectService PossibleProject {
+            get {
+                if (possibleProject == null)
+                {
+                    possibleProject = new PossibleProjectService(context);
+                }
                 return possibleProject;
             }
         }
-        public IReportService Report
-        {
-            get
-            {
+        public IReportService Report {
+            get {
                 return retport;
             }
         }
