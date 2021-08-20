@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ApiProject.Models;
 using ApiProject.IServices;
@@ -8,10 +7,10 @@ namespace ApiProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProjectController : Controller
+    public class ProjectsController : Controller
     {
         IRepositoryWrapper RepoWrapper;
-        public ProjectController(IRepositoryWrapper repoWrapper)
+        public ProjectsController(IRepositoryWrapper repoWrapper)
         {
             RepoWrapper = repoWrapper;
         }
@@ -26,6 +25,12 @@ namespace ApiProject.Controllers
         public Project Get(int id)
         {
             return RepoWrapper.Project.Get(id);
+        }
+
+        [HttpGet("projectName")]
+        public IEnumerable<string> GetProjectName()
+        {
+            return RepoWrapper.Project.GetProjectName();
         }
 
         [HttpPost]
@@ -57,10 +62,10 @@ namespace ApiProject.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var deleteProject = RepoWrapper.Project.Delete(id);
+            var deletedProject = RepoWrapper.Project.Delete(id);
             RepoWrapper.Save();
 
-            return Ok(deleteProject);
+            return Ok(deletedProject);
         }
     }
 }

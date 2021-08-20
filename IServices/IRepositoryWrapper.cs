@@ -9,7 +9,7 @@ namespace ApiProject.IServices
     {
         IProjectService Project { get; }
         IWorkerService Worker { get; }
-        IDistributionService Distributions { get; }
+        IDistributionService Distribution { get; }
         IPossibleProjectService PossibleProject { get; }
         IReportService Report { get; }
         void Save();

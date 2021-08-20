@@ -28,6 +28,12 @@ namespace ApiProject.Controllers
             return RepoWrapper.Worker.Get(id);
         }
 
+        [HttpGet("workerFio")]
+        public IEnumerable<string> GetWorkerFio()
+        {
+            return RepoWrapper.Worker.GetWorkerFio();
+        }
+
         [HttpPost]
         public IActionResult Post(Worker worker)
         {
@@ -57,10 +63,10 @@ namespace ApiProject.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var deleteWorker = RepoWrapper.Worker.Delete(id);
+            var deletedWorker = RepoWrapper.Worker.Delete(id);
             RepoWrapper.Save();
 
-            return Ok(deleteWorker);
+            return Ok(deletedWorker);
         }
     }
 }

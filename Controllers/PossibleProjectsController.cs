@@ -35,6 +35,8 @@ namespace ApiProject.Controllers
             {
                 RepoWapper.PossibleProject.Create(possibleProject);
                 RepoWapper.Save();
+
+                return Ok(possibleProject);
             }
             return BadRequest(ModelState);
         }
@@ -45,7 +47,9 @@ namespace ApiProject.Controllers
             if (ModelState.IsValid)
             {
                 RepoWapper.PossibleProject.Update(possibleProject);
-                RepoWapper.Save(); 
+                RepoWapper.Save();
+
+                return Ok(possibleProject);
             }
             return BadRequest(ModelState);
         }
@@ -53,10 +57,10 @@ namespace ApiProject.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var deletePossibleProject = RepoWapper.PossibleProject.Delete(id);
+            var deletedPossibleProject = RepoWapper.PossibleProject.Delete(id);
             RepoWapper.Save();
 
-            return Ok(deletePossibleProject);
+            return Ok(deletedPossibleProject);
         }
     }
 }

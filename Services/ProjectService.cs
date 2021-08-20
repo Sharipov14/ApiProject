@@ -23,6 +23,18 @@ namespace ApiProject.Services
             Project project = Context.Projects.FirstOrDefault(x => x.ProjectId == id);
             return project;
         }
+        public IEnumerable<string> GetProjectName()
+        {
+            var projects = Context.Projects.ToList();
+            string[] arrProjectName = new string[projects.Count];
+
+            for (int i = 0; i < projects.Count; i++)
+            {
+                arrProjectName[i] = projects[i].ProjectName;
+            }
+
+            return arrProjectName;
+        }
         public void Create(Project project)
         {
             Context.Projects.Add(project);

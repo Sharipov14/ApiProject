@@ -10,7 +10,7 @@ namespace ApiProject.Services
         private IWorkerService worker;
         private IDistributionService distribution;
         private IPossibleProjectService possibleProject;
-        private IReportService retport;
+        private IReportService report;
 
         public RepositoryWrapper(ApplicationContext _context)
         {
@@ -35,8 +35,12 @@ namespace ApiProject.Services
                 return worker;
             }
         }
-        public IDistributionService Distributions {
+        public IDistributionService Distribution {
             get {
+                if (distribution == null)
+                {
+                    distribution = new DistributionsService(context);
+                }
                 return distribution;
             }
         }
@@ -51,7 +55,11 @@ namespace ApiProject.Services
         }
         public IReportService Report {
             get {
-                return retport;
+                if (report == null)
+                {
+                    //report = new RepotService(context);
+                }
+                return report;
             }
         }
         public void Save()

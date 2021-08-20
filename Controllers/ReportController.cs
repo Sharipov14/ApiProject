@@ -18,6 +18,8 @@ namespace ApiProject.Controllers
         [HttpGet]
         public IEnumerable<Report> Get()
         {
+            
+
             return db.Report.ToList();
         }
     }

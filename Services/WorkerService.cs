@@ -23,6 +23,18 @@ namespace ApiProject.Services
             Worker worker = Context.Workers.FirstOrDefault(x => x.WorkerId == id);
             return worker;
         }
+        public IEnumerable<string> GetWorkerFio()
+        {
+            var workers = Context.Workers.ToList();
+            string[] arrWorkerFio = new string[workers.Count];
+
+            for (int i = 0; i < workers.Count; i++)
+            {
+                arrWorkerFio[i] = workers[i].WorkerFio;
+            }
+
+            return arrWorkerFio;
+        }
         public void Create(Worker worker)
         {
             Context.Workers.Add(worker);

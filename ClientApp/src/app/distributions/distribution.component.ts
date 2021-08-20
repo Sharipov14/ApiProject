@@ -13,6 +13,8 @@ export class DistributionComponent implements OnInit {
 
     distribution: Distribution = new Distribution();   // изменяемый товар
     distributions: Distribution[];                // массив товаров
+    arrWorkerFio: string[];
+    arrProjectName: string[];
     tableMode: boolean = true;          // табличный режим
 
     constructor(private dataService: DataService) {}
@@ -25,6 +27,18 @@ export class DistributionComponent implements OnInit {
     loadDistributions() {
         this.dataService.getAll(this.url)
             .subscribe((data: Distribution[]) => this.distributions = data);
+    }
+    loadWorkers() {
+        if (this.arrWorkerFio == null) {
+            this.dataService.getAll("api/workers/workerFio")
+                .subscribe((date: string[]) => this.arrWorkerFio = date);
+        }
+    }
+    loadProjects() {
+        if (this.arrProjectName == null) {
+            this.dataService.getAll("api/projects/projectName")
+            .subscribe((date: string[]) => this.arrProjectName = date);
+        }
     }
     // сохранение данных
     save() {       
@@ -39,6 +53,8 @@ export class DistributionComponent implements OnInit {
     }
     editDistribution(p: Distribution) {
         this.distribution = p;
+        this.loadWorkers();
+        this.loadProjects();
     }
     cancel() {
         this.distribution = new Distribution();
@@ -50,6 +66,8 @@ export class DistributionComponent implements OnInit {
     }
     add() {
         this.cancel();
+        this.loadWorkers();
+        this.loadProjects();
         this.tableMode = false;
     }
 }

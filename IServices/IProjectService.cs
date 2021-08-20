@@ -7,6 +7,7 @@ namespace ApiProject.IServices
     {
         IEnumerable<Project> Get();
         Project Get(int id);
+        IEnumerable<string> GetProjectName();
         void Create(Project project);
         void Update(Project project);
         Project Delete(int id);

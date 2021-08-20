@@ -9,7 +9,7 @@ import { Project } from './project';
 })
 export class ProjectComponent implements OnInit {
 
-    private url = "api/project";
+    private url = "api/projects";
 
     project: Project = new Project();   // изменяемый товар
     projects: Project[];                // массив товаров

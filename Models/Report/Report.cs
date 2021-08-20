@@ -1,4 +1,7 @@
-﻿namespace ApiProject.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace ApiProject.Models
 {
     public partial class Report
     {
@@ -37,6 +40,10 @@
         public int _30 { get; set; }
         public int _31 { get; set; }
 
+        [NotMapped]
+        public int[] Array = new int[31];
+
+        [JsonIgnore]
         public virtual Worker Worker { get; set; }
     }
 }

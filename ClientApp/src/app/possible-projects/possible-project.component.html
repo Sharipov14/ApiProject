@@ -16,7 +16,7 @@
                 <td>{{p?.workerFio}}</td>
                 <td>{{p?.projectName}}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary" (click)="editDistribution(p)">Изменить</button>
+                    <button class="btn btn-sm btn-primary" (click)="editPossibleProject(p)">Изменить</button>
                     <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
                 </td>
             </ng-template>
@@ -30,10 +30,18 @@
         {{possibleProject?.id}}
     </td>
     <td>
-        <input type="number" [(ngModel)]="possibleProject.workerId" class="form-control" />
+        <select class="form-control" name="workerFio" [(ngModel)]="possibleProject.workerFio">
+            <option  *ngFor="let workerFio of arrWorkerFio" [value]="workerFio">
+                {{workerFio}}
+            </option>
+        </select>
     </td>
     <td>
-        <input type="number" [(ngModel)]="possibleProject.projectId" class="form-control" />
+        <select class="form-control" name="projectName" [(ngModel)]="possibleProject.projectName">
+            <option  *ngFor="let projectName of arrProjectName" [value]="projectName">
+                {{projectName}}
+            </option>
+        </select>
     </td>
     <td>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
@@ -45,11 +53,21 @@
 <ng-template #create>
     <div class="form-group">
         <label>ФИО</label>
-        <input type="text" [(ngModel)]="possibleProject.workerFio" class="form-control" />
+        <!-- <input type="text" [(ngModel)]="possibleProject.workerFio" class="form-control" /> -->
+        <select class="form-control" name="workerFio" [(ngModel)]="possibleProject.workerFio">
+            <option  *ngFor="let workerFio of arrWorkerFio" [value]="workerFio">
+                {{workerFio}}
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <label>Проект</label>
-        <input type="text" [(ngModel)]="possibleProject.projectName" class="form-control" />
+        <!-- <input type="text" [(ngModel)]="possibleProject.projectName" class="form-control" /> -->
+        <select class="form-control" name="projectName" [(ngModel)]="possibleProject.projectName">
+            <option  *ngFor="let projectName of arrProjectName" [value]="projectName">
+                {{projectName}}
+            </option>
+        </select>
     </div>
     <div>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
